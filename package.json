@@ -1,0 +1,29 @@
+{
+  "name": "crows",
+  "version": "1.0.0",
+  "description": "Logging API to read and write to mongo",
+  "main": "index.js",
+  "repository": "https://github.com/jackkav/crows",
+  "author": "Jack Kavanagh",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "lint": "eslint src/*"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.0",
+    "nodemon": "^1.11.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-latest": "^6.16.0",
+    "eslint": "^3.11.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1"
+  }
+}
