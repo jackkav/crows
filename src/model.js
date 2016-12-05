@@ -7,7 +7,7 @@ const Error = mongoose.model('error', {
   client: String,       // iOS,username,bundleVersion
   message: String,      // Error in main.js
   stack: String,        // Error stack
-  createdAt: Date,      // datetime of error
+  when: Date,      // datetime of error
   hospital: String,     // 北大医院
   priority: String,     // crash, unhandled, handled
   severity: String,     // warning, error

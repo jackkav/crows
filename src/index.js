@@ -26,7 +26,7 @@ router.route('/errors')
 .post(function(req, res, next) {
   // console.log(req.body)
   const input = req.body
-  input.createdAt = new Date()
+  input.when = new Date()
   const oneError = new Error(input)
   oneError.save(function (err) {
     if (err) {
@@ -43,7 +43,7 @@ router.route('/errors/:env/:id')
   const query = {'application': req.params.id, 'environment': req.params.env}
   Error.find(query)
   .select({_id: 0, __v: 0}) // ignore wierd mongoose auto added stuff
-  .sort({ createdAt: -1 })
+  .sort({ when: -1 })
   .exec((err, errors) => {
     if (err) {
       res.send(err)
