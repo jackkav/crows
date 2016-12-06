@@ -1,7 +1,7 @@
 import {app, router} from './bootstrap'
 import Error from './model'
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
     // do logging
 router.use(function(req, res, next) {
@@ -14,7 +14,7 @@ router.route('/errors')
 .get(function(req, res, next) {
   Error.find()
   .select({_id: 0, __v: 0}) // ignore wierd mongoose auto added stuff
-  .sort({ addedOn: -1 })
+  .sort({ when: -1 })
   .exec((err, errors) => {
     if (err) {
       res.send(err)
@@ -37,10 +37,10 @@ router.route('/errors')
   })
 })
 
-router.route('/errors/:env/:id')
+router.route('/errors/:distribution/:application')
 // Get one show
 .get(function(req, res, next) {
-  const query = {'application': req.params.id, 'environment': req.params.env}
+  const query = {'application': req.params.application, 'distribution': req.params.distribution}
   Error.find(query)
   .select({_id: 0, __v: 0}) // ignore wierd mongoose auto added stuff
   .sort({ when: -1 })
