@@ -1,11 +1,12 @@
 import {app, router} from './bootstrap'
 import Error from './model'
+import logger from './winston'
 
 const port = process.env.PORT || 3001
 
     // do logging
 router.use(function(req, res, next) {
-  console.log('Request: ', req.method, req.url, req.body)
+  console.log('Request: ', req.method, req.url)//, req.body)
   next() // make sure we go to the next routes and don't stop here
 })
 app.use('/api', router)
@@ -24,17 +25,8 @@ router.route('/errors')
 })
 // POST error
 .post(function(req, res, next) {
-  // console.log(req.body)
-  const input = req.body
-  input.when = new Date()
-  const oneError = new Error(input)
-  oneError.save(function (err) {
-    if (err) {
-      console.log(err)
-    } else {
-      res.send('Success')
-    }
-  })
+  logger.log(req.body.level, req.body.message, req.body.stack)
+  res.send('Success')
 })
 
 router.route('/errors/:distribution/:application')
@@ -58,5 +50,5 @@ app.get('/', function(req, res) {
 })
 
 app.listen(port, function() {
-  console.log('Express is listening to http://localhost:3000')
+  console.log('Express is listening to http://localhost:3001')
 })
