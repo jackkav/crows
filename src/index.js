@@ -14,8 +14,8 @@ app.use('/api', router)
 router.route('/errors')
 .get(function(req, res, next) {
   Error.find()
-  .select({_id: 0, __v: 0}) // ignore wierd mongoose auto added stuff
-  .sort({ when: -1 })
+  .select({_id: 0})
+  .sort({ timestamp: -1 })
   .exec((err, errors) => {
     if (err) {
       res.send(err)
@@ -32,10 +32,10 @@ router.route('/errors')
 router.route('/errors/:distribution/:application')
 // Get one show
 .get(function(req, res, next) {
-  const query = {'application': req.params.application, 'distribution': req.params.distribution}
+  const query = {'meta.application': req.params.application, 'meta.distribution': req.params.distribution}
   Error.find(query)
-  .select({_id: 0, __v: 0}) // ignore wierd mongoose auto added stuff
-  .sort({ when: -1 })
+  .select({_id: 0})
+  .sort({ timestamp: -1 })
   .exec((err, errors) => {
     if (err) {
       res.send(err)
