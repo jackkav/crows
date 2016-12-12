@@ -19,7 +19,6 @@ const logger = new winston.Logger({
       prettyPrint: true,
     }),
     new MongoDB({
-      handleExceptions: true,
       db: process.env.DATABASE || 'mongodb://localhost/test',
       // port: 27071,
       collection: 'log',

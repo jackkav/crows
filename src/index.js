@@ -25,6 +25,14 @@ router.route('/errors')
 })
 // POST error
 .post(function(req, res, next) {
+  if (!req.body.level || !req.body.message || !req.body.stack) {
+    res.send('missing level, body or stack')
+    return
+  }
+  if (!req.body.stack.application || !req.body.stack.distribution) {
+    res.send('missing application or distribution')
+    return
+  }
   logger.log(req.body.level, req.body.message, req.body.stack)
   res.send('Success')
 })
